@@ -5,11 +5,11 @@ import pandas as pd
 app = FastAPI()
 
 merged_steam_user_data = pd.read_parquet(
-    "merged_steam_user_data.parquet")
+    "FastAPI/merged_steam_user_data.parquet")
 merged_steam_rev_data = pd.read_parquet(
-    "merged_steam_rev_data.parquet")
+    "FastAPI/merged_steam_rev_data.parquet")
 merged_recommend_model = pd.read_parquet(
-    "merged_recommend_model.parquet")
+    "FastAPI/merged_recommend_model.parquet")
 
 relevant_data = merged_recommend_model[(
     merged_recommend_model['recommend'] == True) & merged_recommend_model['sentiment_analysis'].isin([0, 1, 2])]
