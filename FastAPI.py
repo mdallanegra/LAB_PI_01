@@ -5,11 +5,11 @@ import pandas as pd
 app = FastAPI()
 
 merged_steam_user_data = pd.read_parquet(
-    "FastAPI/merged_steam_user_data.parquet")
+    "merged_steam_user_data.parquet")
 merged_steam_rev_data = pd.read_parquet(
-    "FastAPI/merged_steam_rev_data.parquet")
+    "merged_steam_rev_data.parquet")
 merged_recommend_model = pd.read_parquet(
-    "FastAPI/merged_recommend_model.parquet")
+    "merged_recommend_model.parquet")
 
 relevant_data = merged_recommend_model[(
     merged_recommend_model['recommend'] == True) & merged_recommend_model['sentiment_analysis'].isin([0, 1, 2])]
@@ -44,15 +44,15 @@ def UserForGenre(genero: str = 'Action') -> dict:
 
 @app.get("/PlayTimeGenre")
 def PlayTimeGenre(genero: str = 'Action') -> dict:
-    df_filtered_by_genre = merged_steam_user_data[merged_steam_user_data['genres'] == genero]
-    user_hours = df_filtered_by_genre.groupby(
+    df_filtered_play_by_genre = merged_steam_user_data[merged_steam_user_data['genres'] == genero]
+    user_play_hours = df_filtered_play_by_genre.groupby(
         'release_year')['playtime_forever'].sum()
-    max_time_played_user = user_hours.idxmax()
+    max_time_play_user = int(user_play_hours.idxmax())
 
-    result = {"Año de lanzamiento con más horas jugadas para género {}".format(
-        genero): max_time_played_user}
+    resultado = {"Año de lanzamiento con más horas jugadas para género {}".format(
+        genero): max_time_play_user}
 
-    return result
+    return resultado
 
 
 @app.get("/UsersRecommend")
