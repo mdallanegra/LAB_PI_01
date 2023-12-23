@@ -3,6 +3,7 @@ from fastapi import FastAPI
 app = FastAPI()
 
 
-@app.get("/read_root")
-def read_root():
-    return "Welcome to render"
+@app.get("/UserForGenre")
+def UserForGenre():
+    result = ('Usuario con mas horas jugadas para genero')
+    return result
