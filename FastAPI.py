@@ -28,6 +28,16 @@ item_similarity = cosine_similarity(item_item_matrix.T)
 
 @app.get("/UserForGenre")
 def UserForGenre(genero: str = 'Action') -> dict:
+    """ 
+    Esta funcion recibe el genero de un juego y devuelve el usuario con 
+    mas horas jugadas y la lista de horas.
+
+    Args:
+        genero (str, optional): Genero de juegos. Defaults to 'Action'.
+
+    Returns:
+        dict: Usuario: user_id + Lista {Año: YYYY, Horas: HHHH} 
+    """
     df_filtered_by_genre = merged_steam_user_data[merged_steam_user_data[
         'genres'] == genero]
     user_hours = df_filtered_by_genre.groupby(
@@ -48,6 +58,17 @@ def UserForGenre(genero: str = 'Action') -> dict:
 
 @app.get("/PlayTimeGenre")
 def PlayTimeGenre(genero: str = 'Action') -> dict:
+    """
+    Esta funcion recibe el genero de un juego y devuelve el año con
+    mas horas jugadas para dicho pedido.
+
+    Args:
+        genero (str, optional): Genero de juegos. Defaults to 'Action'.
+
+    Returns:
+        dict: {"Año con más horas jugadas para {genero}}" : AAAA} 
+
+    """
     df_filtered_play_by_genre = merged_steam_user_data[merged_steam_user_data[
         'genres'] == genero]
     user_play_hours = df_filtered_play_by_genre.groupby(
@@ -63,6 +84,18 @@ def PlayTimeGenre(genero: str = 'Action') -> dict:
 
 @app.get("/UsersRecommend")
 def UsersRecommend(year: int = 2017) -> dict:
+    """
+        Esta funcion recibe un año y devuelve top 3 de juegos mas 
+        recomendados para el año dado
+    Args:
+        year (int, optional): Año. Defaults to 2017.
+
+    Returns:
+        dict: 
+            [{"Puesto 1" : {app_name}}, 
+            {"Puesto 2" : {app_name}},
+            {"Puesto 3" : {app_name}}]
+    """
     user_reviews_recommend = merged_steam_rev_data[merged_steam_rev_data[
         'release_year'] == year]
     top_games = user_reviews_recommend.groupby(
@@ -77,6 +110,19 @@ def UsersRecommend(year: int = 2017) -> dict:
 
 @app.get("/UsersNotRecommend")
 def UsersNotRecommend(year: int = 2017):
+    """
+        Esta funcion recibe un año y devuelve top 3 de juegos menos 
+        recomendados para el año dado
+
+    Args:
+        year (int, optional): Año. Defaults to 2017.
+
+    Returns:
+        dict: 
+            [{"Puesto 1" : {app_name}}, 
+            {"Puesto 2" : {app_name}},
+            {"Puesto 3" : {app_name}}]
+    """
     user_reviews_recommend = merged_steam_rev_data[merged_steam_rev_data[
         'release_year'] == year]
     least_recommended = user_reviews_recommend.groupby(
@@ -91,6 +137,16 @@ def UsersNotRecommend(year: int = 2017):
 
 @app.get("/sentiment_analysis")
 def sentiment_analysis(year: int = 2017) -> dict:
+    """
+    Esta funcion recibe un año y devuelve una lista con el nr de
+    reseñas del análisis de sentimientos
+
+    Args:
+        year (int, optional): Año. Defaults to 2017.
+
+    Returns:
+        dict: {Negativo = XX, Neutral = XX, Positiv0 = XX}
+    """
     reviews_by_year = merged_steam_rev_data[merged_steam_rev_data[
         'release_year'] == year]
     counts_by_sentiment = reviews_by_year['sentiment_analysis'].value_counts(
@@ -105,6 +161,19 @@ def sentiment_analysis(year: int = 2017) -> dict:
 
 @app.get("/recomendacion_juego")
 def recomendacion_juego(item_id: int) -> list:
+    """
+    Cuando se ingresa el item_id de un producto, la funcion devuelve una
+    lista de 5 juegos recomendados, similares al ingresado.
+
+    Args:
+        item_id (int): ID del producto.
+
+    Returns:
+        list:
+            [{"Juego recomendado 1" : {app_name}}, 
+            {"Juego recomendado 2" : {app_name}},
+            ...]
+    """
     num_similar_items = 5
     item_id = item_item_matrix.index.get_loc(item_id)
     similar_indices = item_similarity[item_id].argsort()[
@@ -123,6 +192,19 @@ def recomendacion_juego(item_id: int) -> list:
 
 @app.get("/recomendacion_usuario")
 def recomendacion_usuario(user_id: str) -> list:
+    """
+    Cuando se ingresa el id_usuario, la funcion devuelve una lista de 5 juegos
+    recomendados para dicho usuario, similares a los gustos del mismo.
+
+    Args:
+        user_id (str): user_id
+
+    Returns:
+        list: 
+            [{"Juego recomendado 1" : {app_name}}, 
+            {"Juego recomendado 2" : {app_name}},
+            ...]
+    """
     num_recommendations = 5
     user_row = user_item_matrix.loc[user_id].values.reshape(1, -1)
     similarity_scores = cosine_similarity(user_row, user_item_matrix.values)
