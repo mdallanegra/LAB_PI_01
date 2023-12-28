@@ -8,37 +8,34 @@
 </head>
 <body>
 
-# <h1 align=center> **`PROYECTO INDIVIDUAL Nº1`**</h1>
+# <h1 align=center> **`PROYECTO INDIVIDUAL Nº1`**</h1> <!-- omit in toc --> 
 
-# <h1 align=center>**`Machine Learning Operations (MLOps)`**</h1>
+# <h1 align=center>**`Machine Learning Operations (MLOps)`**</h1> <!-- omit in toc --> 
 
-# <h3 align=center>**` Diciembre de 2023 `**</h2>
+# <h3 align=center>**` Diciembre de 2023 `**</h2> <!-- omit in toc --> 
 
-# <h2 align=center>**` Miguel Angel Dallanegra Vilches - DATA Part Time 05 `** </h2>
+# <h2 align=center>**` Miguel Angel Dallanegra Vilches - DATA Part Time 05 `** </h2> <!-- omit in toc --> 
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/67664604/217914153-1eb00e25-ac08-4dfa-aaf8-53c09038f082.png"  height=300>
 </p>
 <hr>
 
-- [ **`PROYECTO INDIVIDUAL Nº1`**](#-proyecto-individual-nº1)
-- [**`Machine Learning Operations (MLOps)`**](#machine-learning-operations-mlops)
-- [**`Diciembre de 2023`**](#diciembre-de-2023)
-- [**`Miguel Angel Dallanegra Vilches - DATA Part Time 05`** ](#miguel-angel-dallanegra-vilches---data-part-time-05-)
-  - [Información General](#información-general)
-  - [Desarrollo](#desarrollo)
-  - [ETL](#etl)
-  - [NLP](#nlp)
-  - [EDA](#eda)
-  - [Tablas y Funciones para FastApi y modelo de Recomendaciones](#tablas-y-funciones-para-fastapi-y-modelo-de-recomendaciones)
-    - [Tablas](#tablas)
-    - [Funciones](#funciones)
-      - [Desarrollo API](#desarrollo-api)
-      - [Modelo de Recomendación](#modelo-de-recomendación)
-  - [Deploy FastAPI \& Render](#deploy-fastapi--render)
-    - [Video](#video)
-  - [Conclusiones](#conclusiones)
-  - [Contacto](#contacto)
+  
+- [Información General](#información-general)
+- [Desarrollo](#desarrollo)
+- [ETL](#etl)
+- [NLP](#nlp)
+- [EDA](#eda)
+- [Tablas y Funciones para FastApi y modelo de Recomendaciones](#tablas-y-funciones-para-fastapi-y-modelo-de-recomendaciones)
+  - [Tablas](#tablas)
+  - [Funciones](#funciones)
+    - [Desarrollo API](#desarrollo-api)
+    - [Modelo de Recomendación](#modelo-de-recomendación)
+- [Deploy FastAPI \& Render](#deploy-fastapi--render)
+- [Video](#video)
+- [Conclusiones](#conclusiones)
+- [Contacto](#contacto)
 
 ## Información General
 
@@ -113,11 +110,11 @@ Es muy importante aclarar que debido a las restricciones de memoria y recursos d
 
 Aqui se producen las funciones solicitadas para el framework FastAPI, las cuales serán:
 
-- def PlayTimeGenre( genero : str ): -> {"Año de lanzamiento con más horas jugadas para Género 'genre'" : year}
-- def UserForGenre( genero : str ): -> {"Usuario con más horas jugadas para Género 'genre'" : 'user_id', "Horas jugadas":[{Año: year, Horas: hours}, {Año: year, Horas: hours}, ... ]}
-- def UsersRecommend( año : int ): -> [{"Puesto 1" : 'item_id'}, {"Puesto 2" : 'item_id'},{"Puesto 3" : 'item_id'}]
-- def UsersNotRecommend( año : int ): -> [{"Puesto 1" : 'item_id'}, {"Puesto 2" : 'item_id'},{"Puesto 3" : 'item_id'}]
-- def sentiment_analysis( año : int ): -> {Negativo = 'count', Neutral = 'count', Positive = 'count'}
+- **def PlayTimeGenre( genero : str ):** -> {"Año de lanzamiento con más horas jugadas para Género 'genre'" : year}
+- **def UserForGenre( genero : str ):** -> {"Usuario con más horas jugadas para Género 'genre'" : 'user_id', "Horas jugadas":[{Año: year, Horas: hours}, {Año: year, Horas: hours}, ... ]}
+- **def UsersRecommend( año : int ):** -> [{"Puesto 1" : 'item_id'}, {"Puesto 2" : 'item_id'},{"Puesto 3" : 'item_id'}]
+- **def UsersNotRecommend( año : int ):** -> [{"Puesto 1" : 'item_id'}, {"Puesto 2" : 'item_id'},{"Puesto 3" : 'item_id'}]
+- **def sentiment_analysis( año : int ):** -> {Negativo = 'count', Neutral = 'count', Positive = 'count'}
 
 Estas funciones se encuentran en el notebook [Lab_PI_01.6.Funciones_FastAPI.ipynb](https://github.com/mdallanegra/LAB_PI_01/blob/main/_notebooks/Lab_PI_01.6.Funciones_FastAPI.ipynb), donde se puede ver el proceso de creacion de cada una de ellas.
 
@@ -126,11 +123,11 @@ Estas funciones se encuentran en el notebook [Lab_PI_01.6.Funciones_FastAPI.ipyn
 En esta sección se encuentran las funciones de recomendacion basadas en cosine-similarity del modulo sklear, que implementan las sugerencias item-item y user-item:
 
 - item-item asigna 5 resultados por similaridad respecto a un item ingresado.
-  - def recomendacion_juego( id de producto ): -> [{"Juego recomendado 1" : {app_name}}, 
+  - **def recomendacion_juego( id de producto ):** -> [{"Juego recomendado 1" : {app_name}}, 
                                                 {"Juego recomendado 2" : {app_name}},
                                                 ...]
 - user-item asigna 5 resultados por similaridad respecto a los gustos del usuario ingresado.
-  - def recomendacion_usuario( id de usuario ): -> [{"Juego recomendado 1" : {app_name}}, 
+  - **def recomendacion_usuario( id de usuario ):** -> [{"Juego recomendado 1" : {app_name}}, 
                                                  {"Juego recomendado 2" : {app_name}},
                                                  ...]
 Por ultimo ambos juegos de funciones anteriormente mencionadas, se encuentrarn en [FastAPI.py](https://github.com/mdallanegra/LAB_PI_01/blob/main/FastAPI.py) con la version definitiva de cada una de ellas, con su docstring correspondiente y listas para hacer el deploy.
@@ -144,7 +141,7 @@ En esta seccion se implementan las funciones anteriormente generadas y se las de
 se encontrará en la direccion web de FastAPI [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
 - En forma pública se utiliza tambien el comando `uvicorn FastAPI:app --host 0.0.0.0 --port 8080` y se encontrará en la direccion web de Render [https://henrylabspi01.onrender.com/docs](https://henrylabspi01.onrender.com/docs). Hay que tener en cuenta que se creó un archivo [requirements.txt](https://github.com/mdallanegra/LAB_PI_01/blob/main/requirements.txt) haciendo `pip freeze > requirements.txt`, con los modulos necesarios para el despliegue.
 
-### Video
+## Video
 
 Google Drive: [Video Explicativo](video.com)
 
