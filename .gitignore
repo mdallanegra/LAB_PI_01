@@ -5,3 +5,4 @@ _src/users_items.json.gz
 _src/user_reviews.json.gz
 _src/steam_games.json.gz
 .DS_Store
+__pycache__

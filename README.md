@@ -134,9 +134,10 @@ Por ultimo ambos juegos de funciones anteriormente mencionadas, se encuentrarn e
 
 En esta seccion se implementan las funciones anteriormente generadas y se las despliegan en el framework FastAPI en forma local y en Render en forma pública.
 
-- Localmente se hace el deploy utilizando el comando `uvicorn FastAPI:app --host 0.0.0.0 --port 8080` y
+- Localmente se hace el deploy utilizando el comando `uvicorn FastAPI:app --reload
+` y
 se encontrará en la direccion web de FastAPI [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
-- En forma pública se utiliza tambien el comando `uvicorn FastAPI:app --host 0.0.0.0 --port 8080` y se encontrará en la direccion web de Render [https://henrylabspi01.onrender.com/docs](https://henrylabspi01.onrender.com/docs). Hay que tener en cuenta que se creó un archivo [requirements.txt](https://github.com/mdallanegra/LAB_PI_01/blob/main/requirements.txt) haciendo `pip freeze > requirements.txt`, con los modulos necesarios para el despliegue.
+- En forma pública se utiliza el comando `uvicorn FastAPI:app --host 0.0.0.0 --port 8080` y se encontrará en la direccion web de Render [https://henrylabspi01.onrender.com/docs](https://henrylabspi01.onrender.com/docs). Hay que tener en cuenta que se creó un archivo [requirements.txt](https://github.com/mdallanegra/LAB_PI_01/blob/main/requirements.txt) haciendo `pip freeze > requirements.txt`, con los modulos necesarios para el despliegue.
 
 ## Video
 
