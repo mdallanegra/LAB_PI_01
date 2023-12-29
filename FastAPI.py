@@ -180,9 +180,7 @@ def recomendacion_juego(item_id: int) -> list:
                      for index in similar_indices]
 
     game_names = [
-        f"Juego recomendado {i+1}: {merged_recommend_model.loc[
-            merged_recommend_model['item_id'] == item_id,
-            'app_name'].values[0]}" for i, item_id in enumerate(similar_items)]
+        f"Juego recomendado {i+1}: {merged_recommend_model.loc[merged_recommend_model['item_id'] == item_id, 'app_name'].values[0]}" for i, item_id in enumerate(similar_items)]
 
     return game_names
 
@@ -209,9 +207,7 @@ def recomendacion_usuario(user_id: str) -> list:
     ).sort_values(ascending=False).index.tolist()[:5]
 
     game_names = [
-        f"Juego recomendado {
-            i+1}: {merged_recommend_model.loc[merged_recommend_model['item_id'] == item_id, 'app_name'].values[0]}"
-        for i, item_id in enumerate(recommended_items)
+        f"Juego recomendado {i+1}: {merged_recommend_model.loc[merged_recommend_model['item_id'] == item_id, 'app_name'].values[0]}" for i, item_id in enumerate(recommended_items)
     ]
 
     return game_names
