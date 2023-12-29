@@ -141,7 +141,7 @@ se encontrará en la direccion web de FastAPI [http://127.0.0.1:8000/docs](http:
 
 ## Video
 
-Google Drive: [Video Explicativo](https://drive.google.com/drive/folders/1-wohy6EfuPZd8HNzbPk7GIo5QrMaE-Ar?usp=drive_link)
+Google Drive: [Video Explicativo](https://drive.google.com/file/d/1ojWR88p48V2NXq-KlYHzg3H0LR48bVSN/view?usp=share_link)
 
 ## Conclusiones
 
