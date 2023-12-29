@@ -162,8 +162,8 @@ def sentiment_analysis(year: int = 2017) -> dict:
 @app.get("/recomendacion_juego")
 def recomendacion_juego(item_id: int) -> list:
     """
-    Cuando se ingresa el item_id de un producto, la funcion devuelve una
-    lista de 5 juegos recomendados, similares al ingresado.
+    Cuando se ingresa el item_id de un producto, la función devuelve una
+    lista de juegos recomendados, similares al ingresado.
 
     Args:
         item_id (int): ID del producto.
@@ -174,18 +174,15 @@ def recomendacion_juego(item_id: int) -> list:
             {"Juego recomendado 2" : {app_name}},
             ...]
     """
-    num_similar_items = 5
     item_id = item_item_matrix.index.get_loc(item_id)
-    similar_indices = item_similarity[item_id].argsort()[
-        ::-1][1:num_similar_items+1]
+    similar_indices = item_similarity[item_id].argsort()[::-1][1:6]
     similar_items = [int(item_item_matrix.index[index])
                      for index in similar_indices]
 
     game_names = [
         f"Juego recomendado {i+1}: {merged_recommend_model.loc[
             merged_recommend_model['item_id'] == item_id,
-            'app_name'].values[0]}" for i,
-        item_id in enumerate(similar_items)]
+            'app_name'].values[0]}" for i, item_id in enumerate(similar_items)]
 
     return game_names
 
@@ -205,18 +202,16 @@ def recomendacion_usuario(user_id: str) -> list:
             {"Juego recomendado 2" : {app_name}},
             ...]
     """
-    num_recommendations = 5
     user_row = user_item_matrix.loc[user_id].values.reshape(1, -1)
     similarity_scores = cosine_similarity(user_row, user_item_matrix.values)
-    similar_users_indices = similarity_scores.argsort()[
-        0][-num_recommendations-1:-1]
+    similar_users_indices = similarity_scores.argsort()[0][-6:-1]
     recommended_items = user_item_matrix.iloc[similar_users_indices].sum(
     ).sort_values(ascending=False).index.tolist()[:5]
 
     game_names = [
-        f"Juego recomendado {i+1}: {merged_recommend_model.loc[
-            merged_recommend_model['item_id'] == item_id,
-            'app_name'].values[0]}" for i,
-        item_id in enumerate(recommended_items)]
+        f"Juego recomendado {
+            i+1}: {merged_recommend_model.loc[merged_recommend_model['item_id'] == item_id, 'app_name'].values[0]}"
+        for i, item_id in enumerate(recommended_items)
+    ]
 
     return game_names
